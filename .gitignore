@@ -1,5 +1,6 @@
 .virtualenv
 baslerbauer_site/db.sqlite3
+baslerbauer_site/static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

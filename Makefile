@@ -17,6 +17,7 @@ sync:
 
 run:
 	${MANAGE} migrate
+	${MANAGE} collectstatic --no-input
 	${MANAGE} runserver
 
 

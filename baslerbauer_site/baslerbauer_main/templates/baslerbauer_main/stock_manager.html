@@ -1,4 +1,8 @@
-{% extends "baslerbauer_main/base.html" %} {% block body %}
+{% extends "baslerbauer_main/base.html" %} 
+{% load static %}
+
+{% block body %}
+<script src="{% static "openfarmers.js" %}"></script>
 <div class="row justify-content-md-center">
 </div>
 {% endblock %}

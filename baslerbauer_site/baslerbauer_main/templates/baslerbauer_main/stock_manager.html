@@ -1,23 +1,53 @@
-{% extends "baslerbauer_main/base.html" %} 
-{% load static %}
-
-{% block body %}
+{% extends "baslerbauer_main/base.html" %} {% load static %} {% block body %}
 <script src="{% static "js/openfarms.js" %}"></script>
-<div class ="row"></div>
 <div class="row justify-content-md-center">
 	<div class="column-md">
-		<table class="table">
-			<tr>
-				<th>Produkt</th>
-				<th>Menge</th>
-			</tr>
-			{% for stock in stock_list %}
-			<tr>
-				<td>{{ stock.product.openfarms_id }}</td>
-				<td>{{ stock.amount }}</td>
-			</tr>
-			{% endfor %}
+		<form>
+			<div class="form-group mb-2">
+				<label for="product">Produkt</label> <input type="text"
+					class="form-control" id="product">
+			</div>
+			<div class="form-group mb-2">
+				<label for="amount">Menge</label> <input type="number"
+					class="form-control" id="amount">
+			</div>
+			<button type="button" class="btn btn-primary" id="btn_add">Hinzufügen</button>
+		</form>
+	</div>
+</div>
+<div class="row justify-content-md-center">
+	<div class="column-md">
+		<table class="table" id="stock_table">
+			<thead>
+				<tr>
+					<th>Produkt</th>
+					<th>Menge</th>
+				</tr>
+			</thead>
+			<tbody id="stock_table_body">
+			</tbody>
 		</table>
+		<script type="text/javascript">
+		function loadStock()
+		{
+			$.getJSON("/api/stock/?own=true",function(data){
+				document.getElementById('stock_table_body').innerHTML = '';
+				$.each(data,function(i,item){
+				    var row = document.getElementById("stock_table_body").insertRow(-1);
+				    row.insertCell(0).innerHTML =item.product_openfarms_url;
+				    row.insertCell(1).innerHTML =item.amount;
+				})
+			})
+		}
+		$("#btn_add").click(function(){
+			var product_id = $("#product").val();
+			var amount = $("#amount").val();
+			$.post("../api/stock/",{csrfmiddlewaretoken:'{{ csrf_token }}',product_id:product_id,amount:amount},function(){
+				loadStock();
+			});
+		});
+		loadStock();
+		</script>
 	</div>
 </div>
 {% endblock %}

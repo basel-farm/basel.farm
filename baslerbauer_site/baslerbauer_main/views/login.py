@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth import authenticate, login as django_login
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-
+from django.shortcuts import redirect
 
 @csrf_exempt
 def login(request):
@@ -11,7 +11,7 @@ def login(request):
         user = authenticate(request, username=request.POST.get("email"), password=request.POST.get("password"))
         if user is not None:
             django_login(request, user)
-            return HttpResponse("OK")
+            return redirect('../stocks/')
         else:
             return HttpResponse("FALSE")
     if request.method == 'POST':

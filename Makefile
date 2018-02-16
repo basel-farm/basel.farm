@@ -12,6 +12,9 @@ install:
 make_migrations:
 	${MANAGE} makemigrations ${APPNAME}
 
+sync:
+	${MANAGE} syncopenfarms
+
 run:
 	${MANAGE} migrate
 	${MANAGE} runserver

@@ -11,14 +11,9 @@ openfarms_urls = {
     'produce': openfarms_api + 'produce/'
 }
 
-def error(errstr):
-    print(errstr)
-
 def list_items(url):
     response = requests.get(url)
-    if response.status_code != requests.codes.ok:
-        error("There was an error sending the request: {}".format(response.status_code))
-        return None
+    response.raise_for_status()
 
     data = response.json()
     return data['items']

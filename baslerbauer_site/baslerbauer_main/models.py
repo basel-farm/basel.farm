@@ -2,20 +2,34 @@ from django.db import models
 
 # c.f: https://docs.djangoproject.com/en/2.0/ref/models/fields/#model-field-types
 
-class Label(models.Model):
-    name = models.CharField(max_length=120)
-
 class Producer(models.Model):
-    name = models.CharField(max_length=120)
-    location = models.CharField(max_length=120)
-    labels = models.ManyToManyField(Label)
-    description = models.TextField()
+    open_farms_id = models.PositiveIntegerField()
+
+class Consumer(models.Model):
+    pass
 
 class Product(models.Model):
-    name = models.CharField(max_length=120)
-    producer = models.ForeignKey(Producer, on_delete=models.CASCADE)
+    open_farms_id = models.PositiveIntegerField()
 
-class Offer(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+class Stock(models.Model):
+    producer = models.ForeignKey( Producer
+                                , on_delete=models.PROTECT
+                                )
+    product = models.ForeignKey( Product
+                               , on_delete=models.PROTECT
+                               )
     amount = models.IntegerField()
 
+class Transaction(models.Model):
+    group = models.PositiveIntegerField()
+    date_time = models.DateTimeField()
+    producer = models.ForeignKey( Producer
+                                , on_delete=models.PROTECT
+                                )
+    consumer = models.ForeignKey( Consumer
+                                , on_delete=models.PROTECT
+                                )
+    product = models.ForeignKey( Product
+                               , on_delete=models.PROTECT
+                               )
+    amount = models.IntegerField()

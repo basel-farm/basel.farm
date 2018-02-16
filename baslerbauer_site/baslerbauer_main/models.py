@@ -50,10 +50,10 @@ class Stock(models.Model):
     amount = models.IntegerField()
 
     def producer_url(self):
-        return self.producer.open_farms_url
+        return self.producer.openfarms_url
 
     def product_url(self):
-        return self.product.open_farms_url
+        return self.product.openfarms_url
 
 class Transaction(models.Model):
     group = models.PositiveIntegerField()

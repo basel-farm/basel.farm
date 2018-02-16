@@ -3,6 +3,22 @@
 
 {% block body %}
 <script src="{% static "openfarmers.js" %}"></script>
+<div class ="row"></div>
 <div class="row justify-content-md-center">
+	<div class="column-md">
+		<table class="table">
+			<tr>
+				<th>Produkt</th>
+				<th>Menge</th>
+			</tr>
+			{% for stock in stock_list %}
+			<tr>
+				<td>{{ stock.product.openfarms_id }}</td>
+				<td>{{ stock.amount }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
 </div>
 {% endblock %}
+

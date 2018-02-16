@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login),
     path('register/', views.register),
+    path('stocks/', views.stock_manager),
 ]
 
 urlpatterns += router.urls

@@ -66,7 +66,7 @@ def register(request):
 
 
 def stock_manager(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         template = loader.get_template('baslerbauer_main/stock_manager.html')
         context = { }
         return HttpResponse(template.render(context,request))

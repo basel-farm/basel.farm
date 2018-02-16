@@ -1,0 +1,18 @@
+{% extends "baslerbauer_main/base.html" %} {% block body %}
+<div class="row justify-content-md-center">
+	<div class="column-sm">
+		<form action="" method="POST">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="inputEmail">Email</label> <input type="email"
+					class="form-control" id="inputEmail" name="email">
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label> <input type="password"
+					class="form-control" id="inputPassword" name="password">
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

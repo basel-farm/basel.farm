@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
 from baslerbauer_main.views import StockViewSet
+from baslerbauer_main import views
 
 router = routers.SimpleRouter()
 router.register(r'stock', StockViewSet, 'Stock')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', views.login),
+    path('register/', views.register),
 ]
 
 urlpatterns += router.urls

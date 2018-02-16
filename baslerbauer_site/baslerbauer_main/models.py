@@ -1,11 +1,12 @@
 from django.db import models
 from .openfarms import OPENFARMS_URLS
+from django.contrib.auth.models import User
 
 # c.f: https://docs.djangoproject.com/en/2.0/ref/models/fields/#model-field-types
 
 class Producer(models.Model):
     openfarms_id = models.PositiveIntegerField()
-
+    user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,default=None)
     @classmethod
     def create_from_openfarms(cls, data):
         """Convert a OpenFarms JSON farm objects to a Producer model instance

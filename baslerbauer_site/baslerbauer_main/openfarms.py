@@ -4,11 +4,11 @@ import requests
 
 # Helper classes to connect to openfarms
 
-openfarms_api = 'http://f.datalets.ch/api/v2/'
+OPENFARMS_API = 'http://f.datalets.ch/api/v2/'
 
-openfarms_urls = {
-    'farms': openfarms_api + 'farms/',
-    'produce': openfarms_api + 'produce/'
+OPENFARMS_URLS = {
+    'farms': OPENFARMS_API + 'farms/',
+    'produce': OPENFARMS_API + 'produce/'
 }
 
 def list_items(url):
@@ -19,10 +19,10 @@ def list_items(url):
     return data['items']
 
 def list_farms():
-    return list_items(openfarms_urls['farms'])
+    return list_items(OPENFARMS_URLS['farms'])
 
 def list_produce():
-    return list_items(openfarms_urls['produce'])
+    return list_items(OPENFARMS_URLS['produce'])
     
 
 # DEBUG

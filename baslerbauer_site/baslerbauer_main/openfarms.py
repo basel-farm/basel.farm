@@ -4,7 +4,8 @@ import requests
 
 # Helper classes to connect to openfarms
 
-OPENFARMS_API = 'http://f.datalets.ch/api/v2/'
+OPENFARMS_DOMAIN = 'http://f.datalets.ch'
+OPENFARMS_API = OPENFARMS_DOMAIN+'/api/v2/'
 
 OPENFARMS_URLS = {
     'farms': OPENFARMS_API + 'farms/',

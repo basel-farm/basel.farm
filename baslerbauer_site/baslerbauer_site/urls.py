@@ -20,7 +20,7 @@ from baslerbauer_main.views import StockViewSet
 from baslerbauer_main import views
 
 router = routers.SimpleRouter()
-router.register(r'stock', StockViewSet, 'Stock')
+router.register(r'api/stock', StockViewSet, 'Stock')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

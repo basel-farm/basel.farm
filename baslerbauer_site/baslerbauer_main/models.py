@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class Producer(models.Model):
     openfarms_id = models.PositiveIntegerField()
     user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,default=None)
+
     @classmethod
     def create_from_openfarms(cls, data):
         """Convert a OpenFarms JSON farm objects to a Producer model instance
@@ -16,7 +17,7 @@ class Producer(models.Model):
 
     @property
     def openfarms_url(self):
-        return "{}{}".format(OPENFARMS_URLS['farms'], self.openfarms_id)
+        return "{}{}/".format(OPENFARMS_URLS['farms'], self.openfarms_id)
 
     def __str__(self):
         return "Producer {}".format(self.openfarms_id)
@@ -29,7 +30,7 @@ class Product(models.Model):
 
     @property
     def openfarms_url(self):
-        return "{}{}".format(OPENFARMS_URLS['produce'], self.openfarms_id)
+        return "{}{}/".format(OPENFARMS_URLS['produce'], self.openfarms_id)
 
     @classmethod
     def create_from_openfarms(cls, data):
@@ -42,30 +43,31 @@ class Product(models.Model):
         return "Product {}".format(self.openfarms_id)
     
 class Stock(models.Model):
-    producer = models.ForeignKey( Producer
-                                , on_delete=models.PROTECT
-                                )
-    product = models.ForeignKey( Product
-                               , on_delete=models.PROTECT
-                               )
+    producer = models.ForeignKey(Producer, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
     amount = models.IntegerField()
 
-    def producer_url(self):
+    @property
+    def producer_openfarms_url(self):
         return self.producer.openfarms_url
 
-    def product_url(self):
+    @property
+    def product_openfarms_url(self):
         return self.product.openfarms_url
+
 
 class Transaction(models.Model):
     group = models.PositiveIntegerField()
     date_time = models.DateTimeField()
-    producer = models.ForeignKey( Producer
-                                , on_delete=models.PROTECT
-                                )
-    consumer = models.ForeignKey( Consumer
-                                , on_delete=models.PROTECT
-                                )
-    product = models.ForeignKey( Product
-                               , on_delete=models.PROTECT
-                               )
+    producer = models.ForeignKey(Producer, on_delete=models.PROTECT)
+    consumer = models.ForeignKey(Consumer, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
     amount = models.IntegerField()
+
+    @property
+    def producer_openfarms_url(self):
+        return self.producer.openfarms_url
+
+    @property
+    def product_openfarms_url(self):
+        return self.product.openfarms_url

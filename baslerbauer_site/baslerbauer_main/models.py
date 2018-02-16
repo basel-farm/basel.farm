@@ -3,13 +3,13 @@ from django.db import models
 # c.f: https://docs.djangoproject.com/en/2.0/ref/models/fields/#model-field-types
 
 class Producer(models.Model):
-    open_farms_id = models.PositiveIntegerField()
+    open_farms_url = models.URLField()
 
 class Consumer(models.Model):
     pass
 
 class Product(models.Model):
-    open_farms_id = models.PositiveIntegerField()
+    open_farms_url = models.URLField()
 
 class Stock(models.Model):
     producer = models.ForeignKey( Producer

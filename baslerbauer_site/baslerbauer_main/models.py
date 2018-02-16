@@ -15,7 +15,7 @@ class Producer(models.Model):
 
     @property
     def openfarms_url(self):
-        return "{}{}".format(OPENFARMS_URL['farms'], self.openfarms_id)
+        return "{}{}".format(OPENFARMS_URLS['farms'], self.openfarms_id)
 
     def __str__(self):
         return "Producer {}".format(self.openfarms_id)
@@ -28,7 +28,7 @@ class Product(models.Model):
 
     @property
     def openfarms_url(self):
-        return "{}{}".format(OPENFARMS_URL['produce'], self.openfarms_id)
+        return "{}{}".format(OPENFARMS_URLS['produce'], self.openfarms_id)
 
     @classmethod
     def create_from_openfarms(cls, data):

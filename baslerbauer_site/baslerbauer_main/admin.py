@@ -1,3 +1,8 @@
 from django.contrib import admin
+from baslerbauer_main.models import *
 
-# Register your models here.
+admin.site.register(Label)
+admin.site.register(Producer)
+admin.site.register(Product)
+admin.site.register(Offer)
+

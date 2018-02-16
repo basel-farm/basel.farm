@@ -1,11 +1,14 @@
 all: run
 
+PIP=.virtualenv/bin/pip
+PYTHON=.virtualenv/bin/python
 
 install:
 	virtualenv .virtualenv
-	.virtualenv/bin/pip install -r requirements.txt
+	${PIP} install -r requirements.txt
 
 run:
+	${PYTHON} baslerbauer_site/manage.py runserver
 
 
 

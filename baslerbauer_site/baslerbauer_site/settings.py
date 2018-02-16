@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'baslerbauer_main'
+    'baslerbauer_main',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

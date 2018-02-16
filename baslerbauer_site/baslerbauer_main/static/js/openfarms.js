@@ -6,7 +6,7 @@ top.openfarms = {
   _produce_got_all: false,
   produce: {},
 
-  listFarms: function(url, success, fail) {
+  listFarms: function(success, fail) {
     if (top.openfarms._farms_got_all) {
       success(top.openfarms.farms);
     } else {
@@ -22,11 +22,11 @@ top.openfarms = {
   },
 
 
-  listProduces: function(url, success, fail) {
+  listProduce: function(success, fail) {
     if (top.openfarms._produces_got_all) {
-      success(top.openfarms.produces);
+      success(top.openfarms.produce);
     } else {
-      $.getJSON(top.openfarms_urls.produces, function(data) { 
+      $.getJSON(top.openfarms_urls.produce, function(data) { 
         top.openfarms.produces = {};
         $.each(data['items'], function(i,produce) {
           top.openfarms.produces[produce['meta']['detail_url']] = produce;
@@ -37,7 +37,7 @@ top.openfarms = {
     }
   },
 
-  getProducer: function(url, success, fail) {
+  getFarm: function(url, success, fail) {
     if (top.openfarms.farms[url] !== null) {
       success(top.openfarms.farms[url]);
     } else {
@@ -56,5 +56,4 @@ top.openfarms = {
     }
   }
 };
-
 

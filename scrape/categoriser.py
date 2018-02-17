@@ -30,7 +30,7 @@ def pargs():
 
     return parser.parse_args()
 
-def get_match(line, categories, food_map):
+def get_category_match(line, categories, food_map):
     matching_cat = set()
     highest_match = 0
 
@@ -67,5 +67,5 @@ if __name__=="__main__":
         sys.exit(0)
 
     for line in fileinput.input():
-        matching_cat, highest_match = get_match(line, categories, food_map)
+        matching_cat, highest_match = get_category_match(line, categories, food_map)
         print("\n{}#{}#{}".format(line.strip(),'|'.join(map(lambda c: ';'.join(list(c)), matching_cat)),highest_match))

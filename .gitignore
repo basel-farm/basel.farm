@@ -1,4 +1,7 @@
 .virtualenv
+/.env
+/env
+
 baslerbauer_site/db.sqlite3
 baslerbauer_site/static/
 
@@ -12,3 +15,5 @@ __pycache__/
 
 /.project
 /.pydevproject
+
+food-composition-ch

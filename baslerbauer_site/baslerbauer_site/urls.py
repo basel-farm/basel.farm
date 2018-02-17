@@ -24,9 +24,9 @@ router.register(r'api/stock', StockViewSet, 'Stock')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.login),
-    path('register/', views.register),
-    path('stocks/', views.stock_manager),
+    path('login/', views.login, name="login"),
+    path('register/', views.register, name="register"),
+    path('stocks/', views.stock_manager, name="stocks"),
 ]
 
 urlpatterns += router.urls

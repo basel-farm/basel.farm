@@ -1,4 +1,6 @@
 from .utils import HttpOpenFarmsResponse
+from . import login
+
 from django.shortcuts import redirect
 from django.template import loader
 
@@ -9,5 +11,5 @@ def stock_manager(request):
         context = { }
         return HttpOpenFarmsResponse(template.render(context,request))
     else:
-        redirect('login')
+        return redirect('login')
 

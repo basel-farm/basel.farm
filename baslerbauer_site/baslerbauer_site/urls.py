@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from baslerbauer_main.views import StockViewSet
+from baslerbauer_main.views import StockViewSet, TransactionViewSet
 from baslerbauer_main import views
 
 router = routers.SimpleRouter()
+router.register(r'api/transaction', TransactionViewSet, 'Transaction')
 router.register(r'api/stock', StockViewSet, 'Stock')
 
 urlpatterns = [

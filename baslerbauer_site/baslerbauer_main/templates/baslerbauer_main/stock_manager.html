@@ -42,7 +42,7 @@
 		$("#btn_add").click(function(){
 			var product_id = $("#product").val();
 			var amount = $("#amount").val();
-			$.post("../api/stock/",{csrfmiddlewaretoken:'{{ csrf_token }}',product_id:product_id,amount:amount},function(){
+			$.post("../api/stock/",{csrfmiddlewaretoken:'{{ csrf_token }}',product_openfarms_id:product_id,amount:amount},function(){
 				loadStock();
 			});
 		});

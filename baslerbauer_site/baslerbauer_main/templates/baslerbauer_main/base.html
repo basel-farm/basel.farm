@@ -12,10 +12,21 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<nav class="navbar navbar-light bg-light">
-	  <span class="navbar-brand mb-0 h1">Basler Bauern</span>
+	<nav class="navbar navbar-expand-md navbar-light bg-light">
+		<span class="navbar-brand mb-0 h1">Basler Bauern</span>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="../stocks">Waren
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item active"><a class="nav-link" href="../transactions">Transaktionen
+						<span class="sr-only">(current)</span>
+				</a></li>
+			</ul>
+		</div>
 	</nav>
-	<div class="container bb-main-container">{% block body %} Default Body {% endblock %}</div>
+	<div class="container bb-main-container">{% block body %} Default
+		Body {% endblock %}</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

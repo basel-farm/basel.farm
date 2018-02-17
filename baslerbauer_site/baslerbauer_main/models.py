@@ -23,7 +23,7 @@ class Producer(models.Model):
         return "Producer {}".format(self.openfarms_id)
 
 class Consumer(models.Model):
-    pass
+    user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,default=None)
 
 class Product(models.Model):
     openfarms_id = models.PositiveIntegerField()
@@ -52,8 +52,16 @@ class Stock(models.Model):
         return self.producer.openfarms_url
 
     @property
+    def producer_openfarms_id(self):
+        return self.producer.openfarms_id
+
+    @property
     def product_openfarms_url(self):
         return self.product.openfarms_url
+
+    @property
+    def product_openfarms_id(self):
+        return self.product.openfarms_id
 
 
 class Transaction(models.Model):
@@ -65,9 +73,13 @@ class Transaction(models.Model):
     amount = models.IntegerField()
 
     @property
-    def producer_openfarms_url(self):
-        return self.producer.openfarms_url
+    def producer_openfarms_id(self):
+        return self.producer.openfarms_id
 
     @property
-    def product_openfarms_url(self):
-        return self.product.openfarms_url
+    def product_openfarms_id(self):
+        return self.product.openfarms_id
+
+class TransactionGroupCounter(models.Model):
+    value = models.PositiveIntegerField()
+

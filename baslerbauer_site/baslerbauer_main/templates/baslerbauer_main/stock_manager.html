@@ -2,7 +2,7 @@
 <script src="{% static "js/openfarms.js" %}"></script>
 <div class="row justify-content-md-center">
 	<div class="column-md">
-		<form>
+		<form class="input-form">
 			<div class="form-group mb-2">
 				<label for="product">Produkt</label> <input type="text"
 					class="form-control" id="product">
@@ -33,16 +33,18 @@
 			$.getJSON("/api/stock/?own=true",function(data){
 				document.getElementById('stock_table_body').innerHTML = '';
 				$.each(data,function(i,item){
-				    var row = document.getElementById("stock_table_body").insertRow(-1);
-				    row.insertCell(0).innerHTML =item.product_openfarms_url;
-				    row.insertCell(1).innerHTML =item.amount;
+					top.openfarms.getProduce(item.product_openfarms_url,function(data){
+					    var row = document.getElementById("stock_table_body").insertRow(-1);
+					    row.insertCell(0).innerHTML =data.name;
+					    row.insertCell(1).innerHTML =item.amount;
+					})
 				})
 			})
 		}
 		$("#btn_add").click(function(){
 			var product_id = $("#product").val();
 			var amount = $("#amount").val();
-			$.post("../api/stock/",{csrfmiddlewaretoken:'{{ csrf_token }}',product_id:product_id,amount:amount},function(){
+			$.post("../api/stock/",{csrfmiddlewaretoken:'{{ csrf_token }}',product_openfarms_id:product_id,amount:amount},function(){
 				loadStock();
 			});
 		});

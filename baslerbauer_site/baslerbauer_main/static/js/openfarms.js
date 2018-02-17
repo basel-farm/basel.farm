@@ -23,22 +23,23 @@ top.openfarms = {
 
 
   listProduce: function(success, fail) {
-    if (top.openfarms._produces_got_all) {
+	 console.log("Get produce List");
+    if (top.openfarms._produce_got_all) {
       success(top.openfarms.produce);
     } else {
       $.getJSON(top.openfarms_urls.produce, function(data) { 
-        top.openfarms.produces = {};
+        top.openfarms.produce = {};
         $.each(data['items'], function(i,produce) {
-          top.openfarms.produces[produce['meta']['detail_url']] = produce;
+          top.openfarms.produce[produce['meta']['detail_url']] = produce;
         });
-        top.openfarms._produces_got_all = true;
-        success(top.openfarms.produces);
+        top.openfarms._produce_got_all = true;
+        success(top.openfarms.produce);
       }).fail(fail);
     }
   },
 
   getFarm: function(url, success, fail) {
-    if (top.openfarms.farms[url] !== null) {
+    if (top.openfarms.farms[url]) {
       success(top.openfarms.farms[url]);
     } else {
       $.getJSON(url, function(data) { 
@@ -49,7 +50,7 @@ top.openfarms = {
   },
 
   getProduce: function(url, success, fail) {
-    if (top.openfarms.produce[url] !== null) {
+    if (top.openfarms.produce[url]) {
       success(top.openfarms.produce[url]);
     } else {
       $.getJSON(url, function(data) { top.openfarms.produce[url] = data; success(data); }).fail(fail);

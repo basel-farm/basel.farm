@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from baslerbauer_main.serializers import *
 from rest_framework import viewsets
 from rest_framework.response import Response
-
+from django.http import HttpResponse
 
 class StockViewSet(viewsets.ViewSet):
     """
@@ -23,6 +23,8 @@ class StockViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
     def create(self, request):
+        if not hasattr(request.user,'producer'):
+            return HttpResponse('Unauthorized', status=403)
         producer = request.user.producer
         product_openfarms_id = request.POST.get("product_id")
         product = get_object_or_404(Product.objects.all(), openfarms_id=product_openfarms_id)

@@ -12,23 +12,36 @@
 				<label for="inputPassword">Password</label> <input type="password"
 					class="form-control" id="inputPassword" name="password">
 			</div>
-			<div class="form-group">
-				<label for="inputProducer">Producer</label>
-				<select name="producer" id="select_producer">
-					{% for producer in producer_list %}
-					<option value="{{ producer.openfarms_url }}"></option>
-					{% endfor %}
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="type"
+					id="type_producer" value="type_producer" checked> <label
+					class="form-check-label" for="type_producer">Produzent</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="type"
+					id="type_consumer" value="type_consumer"> <label
+					class="form-check-label" for="type_consumer">Konsument</label>
+			</div>
+			<div class="form-group" id="fg_producer">
+				<label for="inputProducer" class="form-check-label">Produzent</label> <select name="producer"
+					id="select_producer" class="form-control"> {% for producer in producer_list %}
+					<option value="{{ producer.openfarms_url }}"></option> {% endfor %}
 				</select>
 			</div>
 			<script type="text/javascript">
-			$("#select_producer > option").each(function() {
-				var element_option = this;
-				top.openfarms.getFarm(this.value,function(data){
-					$(element_option).val(data.id);
-					$(element_option).text(data.title);
-				})
-			});
-
+				$("#type_producer").change(function () {
+			    	$("#fg_producer").show();
+			    });
+				$("#type_consumer").change(function () {
+					$("#fg_producer").hide();
+			    });
+				$("#select_producer > option").each(function() {
+					var element_option = this;
+					top.openfarms.getFarm(this.value, function(data) {
+						$(element_option).val(data.id);
+						$(element_option).text(data.title);
+					})
+				});
 			</script>
 			<button type="submit" class="btn btn-primary">Register</button>
 		</form>

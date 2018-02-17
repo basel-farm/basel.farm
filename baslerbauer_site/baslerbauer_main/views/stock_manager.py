@@ -9,5 +9,5 @@ def stock_manager(request):
         context = { }
         return HttpOpenFarmsResponse(template.render(context,request))
     else:
-        redirect('login')
+        return redirect('../login/')
 

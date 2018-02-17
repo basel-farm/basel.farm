@@ -33,9 +33,11 @@
 			$.getJSON("/api/stock/?own=true",function(data){
 				document.getElementById('stock_table_body').innerHTML = '';
 				$.each(data,function(i,item){
-				    var row = document.getElementById("stock_table_body").insertRow(-1);
-				    row.insertCell(0).innerHTML =item.product_openfarms_url;
-				    row.insertCell(1).innerHTML =item.amount;
+					top.openfarms.getProduce(item.product_openfarms_url,function(data){
+					    var row = document.getElementById("stock_table_body").insertRow(-1);
+					    row.insertCell(0).innerHTML =data.name;
+					    row.insertCell(1).innerHTML =item.amount;
+					})
 				})
 			})
 		}

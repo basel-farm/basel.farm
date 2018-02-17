@@ -6,4 +6,5 @@ admin.site.register(Product)
 admin.site.register(Consumer)
 admin.site.register(Stock)
 admin.site.register(Transaction)
+admin.site.register(TransactionGroupCounter)
 

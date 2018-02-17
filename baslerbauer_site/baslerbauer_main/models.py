@@ -1,7 +1,6 @@
 from django.db import models
 from .openfarms import OPENFARMS_URLS
 from django.contrib.auth.models import User
-from datetime import datetime
 
 # c.f: https://docs.djangoproject.com/en/2.0/ref/models/fields/#model-field-types
 
@@ -67,7 +66,7 @@ class Stock(models.Model):
 
 class Transaction(models.Model):
     group = models.PositiveIntegerField()
-    date_time = models.DateTimeField(default=datetime.now)
+    date_time = models.DateTimeField()
     producer = models.ForeignKey(Producer, on_delete=models.PROTECT)
     consumer = models.ForeignKey(Consumer, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
@@ -80,3 +79,7 @@ class Transaction(models.Model):
     @property
     def product_openfarms_id(self):
         return self.product.openfarms_id
+
+class TransactionGroupCounter(models.Model):
+    value = models.PositiveIntegerField()
+

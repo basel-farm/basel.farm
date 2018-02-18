@@ -11,6 +11,11 @@
 				<label for="inputPassword">Password</label> <input type="password"
 					class="form-control" id="inputPassword" name="password">
 			</div>
+			{% if login_failed %}
+			<div class="form-group">
+    			<label class="text-danger">Login fehlgeschlagen</label>
+  			</div>
+  			{% endif %}
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 	</div>

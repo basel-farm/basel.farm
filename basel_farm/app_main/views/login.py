@@ -13,7 +13,11 @@ def login(request):
             django_login(request, user)
             return redirect('../stocks/')
         else:
-            return HttpResponse("FALSE")
+            template = loader.get_template('baslerbauer_main/login.html')
+            context = {
+                'login_failed' : True
+            }
+            return HttpResponse(template.render(context, request))
     if request.method == 'POST':
         return user_login(request)
     else:

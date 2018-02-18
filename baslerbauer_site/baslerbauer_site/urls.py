@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 from rest_framework import routers
 from baslerbauer_main.views import StockViewSet, TransactionViewSet
 from baslerbauer_main import views
@@ -24,6 +25,7 @@ router.register(r'api/transaction', TransactionViewSet, 'Transaction')
 router.register(r'api/stock', StockViewSet, 'Stock')
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/transactions')),
     path('admin/', admin.site.urls),
     path('login/', views.login, name="login"),
     path('register/', views.register, name="register"),

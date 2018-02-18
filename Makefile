@@ -5,9 +5,14 @@ PIP=.virtualenv/bin/pip
 PYTHON=.virtualenv/bin/python
 MANAGE=${PYTHON} baslerbauer_site/manage.py
 
-install:
-	virtualenv .virtualenv
+install: setup migrate sync
+
+setup:
+	virtualenv -p python3 .virtualenv
 	${PIP} install -r requirements.txt
+
+migrate:
+	${MANAGE} migrate
 
 make_migrations:
 	${MANAGE} makemigrations ${APPNAME}
@@ -15,8 +20,10 @@ make_migrations:
 sync:
 	${MANAGE} syncopenfarms
 
-run:
-	${MANAGE} migrate
+createsuperuser:
+	${MANAGE} createsuperuser
+
+run: migrate
 	${MANAGE} collectstatic --no-input -l
 	${MANAGE} runserver
 

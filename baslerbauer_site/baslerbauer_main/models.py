@@ -9,11 +9,11 @@ class Producer(models.Model):
     user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,default=None)
 
     @classmethod
-    def create_from_openfarms(cls, data):
+    def from_openfarms(cls, data):
         """Convert a OpenFarms JSON farm objects to a Producer model instance
         
            This is used by the syncopenfarms command to create producers"""
-        return cls.objects.create(openfarms_id=data['id'])
+        return cls(openfarms_id=data['id'])
 
     @property
     def openfarms_url(self):
@@ -33,11 +33,11 @@ class Product(models.Model):
         return "{}{}/".format(OPENFARMS_URLS['produce'], self.openfarms_id)
 
     @classmethod
-    def create_from_openfarms(cls, data):
+    def from_openfarms(cls, data):
         """Convert a OpenFarms JSON produce objects to a Product model instance
         
            This is used by the syncopenfarms command to create products"""
-        return cls.objects.create(openfarms_id=data['id'])
+        return cls(openfarms_id=data['id'])
 
     def __str__(self):
         return "Product {}".format(self.openfarms_id)

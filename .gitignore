@@ -2,8 +2,8 @@
 /.env
 /env
 
-baslerbauer_site/db.sqlite3
-baslerbauer_site/static/
+basel_farm/db.sqlite3
+basel_farm/static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

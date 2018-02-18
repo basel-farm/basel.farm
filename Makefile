@@ -1,9 +1,8 @@
 all: make_migrations run
 
-APPNAME=baslerbauer_main
 PIP=.virtualenv/bin/pip
 PYTHON=.virtualenv/bin/python
-MANAGE=${PYTHON} baslerbauer_site/manage.py
+MANAGE=${PYTHON} basel_farm/manage.py
 
 install: setup migrate sync
 
@@ -15,7 +14,7 @@ migrate:
 	${MANAGE} migrate
 
 make_migrations:
-	${MANAGE} makemigrations ${APPNAME}
+	${MANAGE} makemigrations
 
 sync:
 	${MANAGE} syncopenfarms

@@ -22,9 +22,9 @@ $ make run
 ```bash
 $ virtualenv .virtualenv
 $ .virtualenv/bin/pip install -r requirements.txt
-$ .virtualenv/bin/python baslerbauer_site/manage.py migrate
-$ .virtualenv/bin/python baslerbauer_site/manage.py createsuperuser
-$ .virtualenv/bin/python baslerbauer_site/manage.py syncopenfarms
-$ .virtualenv/bin/python baslerbauer_site/manage.py collectstatic
-$ .virtualenv/bin/python baslerbauer_site/manage.py runserver
+$ .virtualenv/bin/python basel_farm/manage.py migrate
+$ .virtualenv/bin/python basel_farm/manage.py createsuperuser
+$ .virtualenv/bin/python basel_farm/manage.py syncopenfarms
+$ .virtualenv/bin/python basel_farm/manage.py collectstatic
+$ .virtualenv/bin/python basel_farm/manage.py runserver
 ```

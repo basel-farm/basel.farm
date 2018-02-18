@@ -1,0 +1,58 @@
+{% extends "app_main/base.html" %} {% block body %}
+<div class="row justify-content-md-center">
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active" id="label_all">
+    <input type="radio" name="options" id="btn_all" autocomplete="off" checked> Alle
+  </label>
+  <label class="btn btn-secondary" id="label_own">
+    <input type="radio" name="options" id="btn_own" autocomplete="off"> Eigene
+  </label>
+</div>
+</div>
+<div class="row justify-content-md-center">
+	<div class="col">
+		<table class="table" id="transaction_table">
+			<thead>
+				<tr>
+					<th>Datum</th>
+					<th>Produzent</th>
+					<th>Produkt</th>
+					<th>Menge</th>
+				</tr>
+			</thead>
+			<tbody id="transaction_table_body">
+			</tbody>
+		</table>
+		<script type="text/javascript">
+		var only_own;
+		function loadTransactions()
+		{
+			apiUrl = "/api/transaction/";
+			if(only_own)
+			{
+				apiUrl+="?own=true";
+			}
+			$.getJSON(apiUrl,function(data){
+				document.getElementById('transaction_table_body').innerHTML = '';
+				$.each(data,function(i,item){
+				    var row = document.getElementById("transaction_table_body").insertRow(-1);
+				    row.insertCell(0).innerHTML =item.date_time;
+				    row.insertCell(1).innerHTML =item.producer_openfarms_id;
+				    row.insertCell(2).innerHTML =item.product_openfarms_id;
+				    row.insertCell(3).innerHTML =item.amount;
+				})
+			})
+		};
+		loadTransactions();
+		$("#label_all").click(function(){
+			only_own=false;
+			loadTransactions();
+		});
+		$("#label_own").click(function(){
+			only_own=true;
+			loadTransactions();
+		});
+		</script>
+	</div>
+</div>
+{% endblock %}

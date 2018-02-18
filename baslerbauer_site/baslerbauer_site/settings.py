@@ -25,7 +25,11 @@ SECRET_KEY = '6i4se)lud@zyyi@(0l@nv9oy$dr+u2_%q^cm3-q@5-l!349qjj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+env = os.environ.copy()
+if 'ALLOWED_HOSTS' in env:
+    ALLOWED_HOSTS = env['ALLOWED_HOSTS'].split(',')
+else:
+    ALLOWED_HOSTS = ['*']  # not in production!
 
 
 # Application definition
@@ -121,4 +125,3 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-

@@ -13,7 +13,7 @@ def login(request):
             django_login(request, user)
             return redirect('../stocks/')
         else:
-            template = loader.get_template('baslerbauer_main/login.html')
+            template = loader.get_template('app_main/login.html')
             context = {
                 'login_failed' : True
             }

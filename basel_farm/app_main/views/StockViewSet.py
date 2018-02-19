@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from app_main.serializers import *
 from rest_framework import viewsets
 from rest_framework.response import Response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from app_main.models import *
 
 class StockViewSet(viewsets.ViewSet):
@@ -11,9 +11,12 @@ class StockViewSet(viewsets.ViewSet):
     """
     def list(self, request):
         queryset = Stock.objects.all()
-        username = self.request.query_params.get('own', None)
-        if username is not None:
-            queryset = queryset.filter(producer=request.user.producer)
+        get_own = self.request.query_params.get('own', None)
+        if get_own:
+            if request.user.is_authenticated and request.user.producer:
+                queryset = queryset.filter(producer=request.user.producer)
+            else: # Wanted to see own, but is not producer. 403
+                return HttpResponseForbidden("You are not a producer.")
         serializer = StockSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -24,8 +27,8 @@ class StockViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
     def create(self, request):
-        if not hasattr(request.user,'producer'):
-            return HttpResponse('Unauthorized', status=403)
+        if not self.user.is_authenticated or not request.user.producer:
+            return HttpResponseForbidden('You must be a producer to do this.')
         producer = request.user.producer
         product_openfarms_id = request.POST.get("product_openfarms_id")
         product = get_object_or_404(Product.objects.all(), openfarms_id=product_openfarms_id)

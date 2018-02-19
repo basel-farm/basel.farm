@@ -28,8 +28,9 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/transactions')),
     path('admin/', admin.site.urls),
     path('login/', views.login, name="login"),
+    path('logout/', views.logout, name="logout"),
     path('register/', views.register, name="register"),
-    path('stocks/', views.stock_manager, name="stocks"),
+    path('stocks/', views.stocks, name="stocks"),
     path('transactions/', views.transactions, name="transactions"),
 ]
 

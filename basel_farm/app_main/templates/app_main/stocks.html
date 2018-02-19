@@ -1,5 +1,6 @@
 {% extends "app_main/base.html" %} {% load static %} {% block body %}
 <script src="{% static "js/openfarms.js" %}"></script>
+{% if user.is_authenticated and user.producer %}
 <div class="row justify-content-md-center">
 	<div class="col-6">
 		<form class="input-form">
@@ -15,6 +16,17 @@
 		</form>
 	</div>
 </div>
+<div class="row justify-content-md-center">
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active" id="label_all">
+    <input type="radio" name="options" id="btn_all" autocomplete="off" checked> Alle
+  </label>
+  <label class="btn btn-secondary" id="label_own">
+    <input type="radio" name="options" id="btn_own" autocomplete="off"> Eigene
+  </label>
+</div>
+</div>
+{% endif %}
 <div class="row justify-content-md-center">
 	<div class="col">
 		<table class="table" id="stock_table">

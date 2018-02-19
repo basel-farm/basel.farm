@@ -43,11 +43,8 @@ class TransactionViewSet(viewsets.ViewSet):
 
     def create(self, request):
         consumer = request.user.consumer
-
         i = json.loads(request.body.decode('utf8'))
-
         trxs = []
-
         group = self.get_group_value()
         for e in i:
             producer = get_object_or_404( Producer.objects.all()
@@ -55,7 +52,6 @@ class TransactionViewSet(viewsets.ViewSet):
             product = get_object_or_404( Product.objects.all()
                                        , openfarms_id=e['product_openfarms_id'])
             amount = e['amount']
-    
             trxs.append(Transaction( group=group
                                    , date_time=datetime.now()
                                    , producer=producer
@@ -63,9 +59,7 @@ class TransactionViewSet(viewsets.ViewSet):
                                    , product=product
                                    , amount=amount
                                    ))
-
         self.update_stock(trxs)
-
         trx = Transaction.objects.all().filter(group=group)
         serializer = TransactionSerializer(trx, many=True)
         return Response(serializer.data)
